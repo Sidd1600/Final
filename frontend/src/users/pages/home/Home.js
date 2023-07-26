@@ -1,14 +1,23 @@
-import React from 'react'
-import Navbar3 from '../../components/Navbar3'
-import Hero from './Hero'
-import Footer from './Footer'
+import React,{useContext,useEffect} from 'react'
+import Hero from '../../components/home_components/Hero'
+import Carousel from '../../components/home_components/Carousel'
+import Featured from '../../components/home_components/Featured'
+import Footer from '../../components/home_components/Footer'
+import { AuthContext } from "../../../context/auth-context";
 
-export default function Home() {
+export default function Home(props) {
+  const a=useContext(AuthContext)
+  useEffect(()=>{
+    props.setNavbar();
+  },[])
   return (
     <div>
-      <Navbar3 />
-      <Hero />
-      <Footer />
+      <Hero/>
+      <div className="container">
+        <Carousel/>
+      </div> 
+      <Featured/>
+      <Footer/>
     </div>
   )
 }
