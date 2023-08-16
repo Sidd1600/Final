@@ -100,7 +100,7 @@ export default function App() {
     localStorage.setItem("FoodCart",JSON.stringify(cart));
   },[cart])
   let routes;
-  if(token){
+  // if(token){
     routes=(
       <>
        <Route exact path='/' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
@@ -120,28 +120,28 @@ export default function App() {
         <Route exact path='/admin/menu' element={<AdminMenu setNavbar={adminNavbar}/>}/>
       </>
     )
-  }else{
-    routes=(
-      <>
-       <Route exact path='/' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
-        <Route exact path='/login' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
-        <Route exact path='/logout' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
-        <Route exact path='/profile' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
-        <Route exact path='/signup' element={<SignupPage />} />
-        <Route exact path='/services/:id' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
-        {/* <Route exact path='/services' element={<UpdateForm />} /> */}
-        <Route exact path='/about' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
-        <Route exact path="/user/about" element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
-        <Route exact path='/user/services' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
-        <Route exact path="/user/home" element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
-        <Route exact path='/user/menu' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
-        <Route exact path='/user/cart' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
-        <Route exact path='/admin/order' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
-        <Route exact path='/admin/updates' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
-        <Route exact path='/admin/menu' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
-      </>
-    )
-  }
+  // }else{
+  //   routes=(
+  //     <>
+  //      <Route exact path='/' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
+  //       <Route exact path='/login' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
+  //       <Route exact path='/logout' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
+  //       <Route exact path='/profile' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
+  //       <Route exact path='/signup' element={<SignupPage />} />
+  //       <Route exact path='/services/:id' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
+  //       {/* <Route exact path='/services' element={<UpdateForm />} /> */}
+  //       <Route exact path='/about' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
+  //       <Route exact path="/user/about" element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
+  //       <Route exact path='/user/services' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
+  //       <Route exact path="/user/home" element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
+  //       <Route exact path='/user/menu' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
+  //       <Route exact path='/user/cart' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
+  //       <Route exact path='/admin/order' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
+  //       <Route exact path='/admin/updates' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>} />
+  //       <Route exact path='/admin/menu' element={<LoginPage userNavbar={userNavbar} adminNavbar={adminNavbar} setNavbar={noneNavbar}/>}  />
+  //     </>
+  //   )
+  // }
   return (
     <AuthContext.Provider value={{isLoggedin: !!token, token: token, name: name, login: Login, logout: Logout,email:email,userid:userid}}>
     <BrowserRouter>

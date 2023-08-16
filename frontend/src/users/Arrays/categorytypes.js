@@ -38,7 +38,11 @@ const categories_capital= [
 {
     id: 10,
     name: "NON VEG."
+},{
+    id: 10,
+    name: "fsf VEG."
 },
+
 ];
 function sentenceCase (str) {
     if ((str===null) || (str===''))

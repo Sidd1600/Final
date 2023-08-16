@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const canteenmenu = new mongoose.Schema({
+  img: String,
   name: String,
   price: Number,
   amount: Number,

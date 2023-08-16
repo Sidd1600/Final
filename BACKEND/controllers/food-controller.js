@@ -30,6 +30,7 @@ const orderget = (req, res) => {
 
 const foodpost =  async (req, res) => {
     const newitem =new Menu({
+        img:req.body.img,
         name: req.body.name,
         category: req.body.category,
         amount: req.body.amount,
@@ -69,6 +70,7 @@ const foodgetqn = (req, res) =>{
       { name: req.params.nitem },
       {
         $set: {
+          img:req.body.img,
           name: req.body.name,
           price: req.body.price,
           category: req.body.category,

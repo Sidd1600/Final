@@ -7,7 +7,7 @@ export default function Itemcard({item, handleClick}){
     const {name, price}=item;
     return (
         <div className="item-card">
-            <img alt="item" />
+            <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95-IMZwCUaUFRaENKc7sinAX-YJG5sNPhMw&usqp=CAU"alt="item" />
             <div className="bottom-part" >
                 <p className="food-name">{name}</p>
                 <div className="price-tag">

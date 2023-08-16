@@ -25,7 +25,7 @@ app.get("/", contfood.foodget );
 app.get("/order", contfood.orderget );
 
 // app.get("/login",contfood.foodlogin);
-app.use(checkAuth)
+// app.use(checkAuth)
 // ANSWERING A POST REQUEST 
 app.post("/", contfood.foodpost );
 

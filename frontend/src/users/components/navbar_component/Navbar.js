@@ -5,8 +5,11 @@ import { Icon } from '@iconify/react';
 import userNavbar from '../../Arrays/userNavbar';
 import { AuthContext } from '../../../context/auth-context';
 import { useLocation } from 'react-router-dom';
+import {GiHamburgerMenu} from 'react-icons/gi';
+import {MdOutlineRestaurantMenu} from 'react-icons/md';
 
 export default function Navbar({size}) {
+  const [toggleMenu,setToggleMenu]=useState(false);
   const [isClicked,setClicked]=useState(false);
   const [imageSourceUrl, setImageSourceUrl] = useState(null);
   const [dropdown,setDropdown]=useState(false)
@@ -14,7 +17,18 @@ export default function Navbar({size}) {
   let location = useLocation();
   location=location.pathname;
   location=location.slice(6);
-
+ 
+  
+  let cont;
+  if(dat.name===null){
+    cont="HELLO"
+  }else{
+    cont=`${((dat.name.length)<7)?dat.name:(dat.name.slice(0,5)+"...")}`
+  }
+  const [text, setText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // const typingSpeed = 100;
+  const targetText = `Welcome to IITI Night Canteen,${cont}`; 
   useEffect(()=>{
     
     let a=Array.from(document.getElementsByClassName("nav-bar-links"));
@@ -44,8 +58,15 @@ export default function Navbar({size}) {
     }
 
     downloadImage(url);
+    if (currentIndex < targetText.length) {
+      const timeout = setInterval(() => {
+        setText(prevText => prevText + targetText[currentIndex]);
+        setCurrentIndex(prevIndex => prevIndex + 1);
+      },75);
+      return () => clearTimeout(timeout);
+    }
 
-  },[location])
+  },)
 
   const removeButton=()=>{
     const elements = document.getElementsByClassName("nav-bar-links");
@@ -64,35 +85,93 @@ export default function Navbar({size}) {
   }
   var data=userNavbar;
 
-let cont;
-  if(dat.name===null){
-    cont="HELLO"
-  }else{
-    cont=`${((dat.name.length)<7)?dat.name:(dat.name.slice(0,5)+"...")}`
-  }
+// let cont;
+//   if(dat.name===null){
+//     cont="HELLO"
+//   }else{
+//     cont=`${((dat.name.length)<7)?dat.name:(dat.name.slice(0,5)+"...")}`
+//   }
 
   return (
-    <nav className="navbar-container">
-    <Link to="/"  className='logo-name' onClick={()=>{removeButton(); document.getElementsByClassName("nav-bar-links")[0].classList.add("nav-button")}} >
-        {imageSourceUrl && <img src={imageSourceUrl} alt="logo" className="logo" />}
-        <p className="name">IITI NIGHT CANTEEN</p>
-    </Link>
-    <ul className="navitems">
-          {data.map((item)=><li key={item.id} ><Link className="nav-bar-links" id={item.id} onClick={handleClick} to={item.url} >{item.title}</Link></li>)}
-        </ul>
-        <div className="icons-container">
-          <Icon icon="mdi:user" id='user' width={24} height={24}  onClick={()=>setDropdown(!dropdown)}/>
-          {dropdown&&<ul className='drop-down-menu'>
-            <li className='drop-down-item'><Link className='drop-down-links' to="/profile">Profile</Link></li>
-            <li className='drop-down-item'><Link className='drop-down-links' to="/logout"> Logout</Link></li>
-          </ul>}
-          <Link to="/user/cart" className='icons' >
-            <Icon icon="mdi:cart" width={24} height={24}  />
-            {size>0&&<div className='circle-cart'>{size}</div>}
-            </Link>
-          <Icon onClick={handleMenu} className='hamburger-menu' icon={isClicked ?"maki:cross":"ion:menu"} width={24} height={24} />
-          {cont}
+    // <div className="main">
+    // <nav className="navbar">
+  
+    // <ul className="navitems">
+    //       {data.map((item)=><li key={item.id} ><Link className="nav-bar-links" id={item.id} onClick={handleClick} to={item.url} >{item.title}</Link></li>)}
+    // </ul>
+      
+    // </nav>
+    // {/* <Link to="/"  className='logo-name' onClick={()=>{removeButton(); document.getElementsByClassName("nav-bar-links")[0].classList.add("nav-button")}} > */}
+    //    {/* <div className="img-column">
+    //    {imageSourceUrl && <img src={imageSourceUrl} alt="logo" className="logo" />}
+    //    </div>  */}
+    // {/* </Link> */}
+    // <p className="writing-animation">{text}</p>
+    // <nav className="navbar">
+    // <div className="icons-container">
+    //       <Icon icon="mdi:user" id='user' width={24} height={24}  onClick={()=>setDropdown(!dropdown)}/>
+    //       {dropdown&&<ul className='drop-down-menu'>
+    //         <li className='drop-down-item'><Link className='drop-down-links' to="/profile">Profile</Link></li>
+    //         <li className='drop-down-item'><Link className='drop-down-links' to="/logout"> Logout</Link></li>
+    //       </ul>}
+    //       <Link to="/user/cart" className='icons' >
+    //         <Icon icon="mdi:cart" width={24} height={24}  />
+    //         {size>0&&<div className='circle-cart'>{size}</div>}
+    //         </Link>
+    //       <Icon onClick={handleMenu} className='hamburger-menu' icon={isClicked ?"maki:cross":"ion:menu"} width={24} height={24} />
+    //       {cont}
+    //     </div> 
+    //     </nav>
+    //   </div>
+    <div className='main'>
+      <nav className='app__navbar'>
+        <div className='app__navbar-logo'>
+          <h1>NIGHT CANTEEN</h1>
         </div>
-    </nav>
+        <ul className="app__navbar-links">
+           {data.map((item)=><li key={item.id} ><Link className="nav-bar-links" id={item.id} onClick={handleClick} to={item.url} >{item.title}</Link></li>)}
+        </ul>
+        <div className="app__navbar-login">
+       
+          <Icon icon="mdi:user" className="profile"id='user' width={24} height={24}  onClick={()=>setDropdown(!dropdown)}/>
+            {dropdown&&<ul className='drop-down-menu'>
+              <li className='drop-down-item'><Link className='drop-down-links' to="/profile">Profile</Link></li>
+              <li className='drop-down-item'><Link className='drop-down-links' to="/logout"> Logout</Link></li>
+            </ul>}
+           
+          <div className='line' />
+            <Link to="/user/cart" className='icons' >
+              <Icon icon="mdi:cart" width={24} height={24}  />
+                {size>0&&<div className='circle-cart'>{size}</div>}
+            </Link>
+        </div>
+        {/* <Icon onClick={handleMenu} className='hamburger-menu' icon={isClicked ?"maki:cross":"ion:menu"} width={24} height={24} /> */}
+        {/* <Icon onClick={handleMenu} className='hamburger-menu' icon={isClicked ?"maki:cross":"ion:menu"} width={24} height={24} /> */} 
+
+        <div className="app__navbar-smallscreen">
+        <GiHamburgerMenu style={{cursor:"pointer"}}color="#fff" fontSize={27} onClick={() => setToggleMenu(true)} />
+        {toggleMenu && (
+          <div className="app__navbar-smallscreen_overlay flex__center slide-bottom">
+            <MdOutlineRestaurantMenu fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
+            <ul className="app__navbar-smallscreen_links">
+             {/* {data.map((item)=><li key={item.id} ><Link className="smallscreen-links" id={item.id} onClick={handleClick} to={item.url} >{item.title}</Link></li>)} */}
+              <li><Link className="hamburger-links" to="/user/home" onClick={() => setToggleMenu(false)}>Home</Link></li>
+              <li><Link className="hamburger-links" to="/user/menu" onClick={() => setToggleMenu(false)}>Menu</Link></li>
+              <li><Link className="hamburger-links" to="/user/about" onClick={() => setToggleMenu(false)}>About</Link></li>
+              <li><Link className="hamburger-links" to="/user/faq" onClick={() => setToggleMenu(false)}>FAQ</Link></li>
+              {/* <li><a href="/" onClick={() => setToggleMenu(false)}>Contact</a></li> */}
+            </ul>
+            <ul className='app__navbar-smallscreen-login'>
+              <li><Link className="hamburger-links" to="/user/profile" onClick={() => setToggleMenu(false)}>Profile</Link></li>
+              <li><Link className="hamburger-links" to="/user/cart" onClick={() => setToggleMenu(false)}>Cart</Link></li>
+              <li><Link className="hamburger-links" to="/user/logout" onClick={() => setToggleMenu(false)}>Logout</Link></li>
+            </ul>
+          </div>
+        )}
+      </div> 
+
+      </nav>
+    </div>
+      
   )
 }
