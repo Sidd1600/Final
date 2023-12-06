@@ -7,7 +7,7 @@ const ejs = require("ejs");
 const express = require('express');
 const path = require('path');
 const app = express();
-// const authRoute = require("./routers/auth");
+const authRoute = require("./routers/auth");
 const foods = require("./routers/food-routes.js");
 const users = require("./routers/user-routes.js");
 const cors = require("cors");
@@ -19,6 +19,7 @@ const findOrCreate=require("mongoose-findorcreate");
 const jwt=require("jsonwebtoken")
 const multer=require("multer");
 const order=require("./routers/OrderData.js")
+const keys=require("./keys")
 
 // BY HASHING AND SALTING WITH BCRYPT
 const bcrypt=require("bcrypt");
@@ -26,6 +27,7 @@ const saltRounds=10;
 // import User from './usermodel';
 
 
+app.use(cors())
 
 app.use(express.json())
 
@@ -37,6 +39,7 @@ app.use(bodyParser.urlencoded({
 app.use("/canteen/food", foods);
 app.use("/canteen/user", users);
 app.use("/canteen/orders", order);
+app.use("/auth", authRoute);
 
 // app.use(
 // 	cookieSession({
@@ -64,6 +67,7 @@ app.use(passport.session());
 
 const User = require("./models/usermodel.js");
 
+
 // app.use(
 // 	cors({
 // 		origin: "http://localhost:3000",
@@ -71,27 +75,31 @@ const User = require("./models/usermodel.js");
 // 		credentials: true,
 // 	})
 // );
-passport.serializeUser((user, done) => {
-	done(null, user);
-});
+// app.post("/auth/google", passport.authenticate("google", ["profile"])
+// // (req, res) => {res.json("LOGIN GOOGLE")}
+// );
+// app.get("/auth/home", passport.authenticate("google"));
+// passport.serializeUser((user, done) => {
+// 	done(null, user);
+// });
 
-passport.deserializeUser((user, done) => {
-	done(null, user);
-});
-passport.use(
-	new GoogleStrategy(
-		{
-			clientID: "560528787084-3vs89teui1dglhv8i4t2tt0v9l41vfdv.apps.googleusercontent.com",
-			clientSecret: "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",
-			callbackURL: "/auth/google/home",
-			scope: ["profile", "email"],
-		},
-		function (accessToken, refreshToken, profile, callback) {
-			callback(null, profile);
-      console.log(profile);
-		}
-	)
-);
+// passport.deserializeUser((user, done) => {
+// 	done(null, user);
+// });
+// passport.use(
+// 	new GoogleStrategy(
+// 		{
+// 			clientID: "560528787084-3vs89teui1dglhv8i4t2tt0v9l41vfdv.apps.googleusercontent.com",
+// 			clientSecret: "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",
+// 			callbackURL: "/auth/google/home",
+// 			scope: ["profile", "email"],
+// 		},
+// 		function (accessToken, refreshToken, profile, callback) {
+// 			callback(null, profile);
+//       console.log(profile);
+// 		}
+// 	)
+// );
 
 
 // app.use("/auth", authRoute);
@@ -127,7 +135,7 @@ app.use(bodyParser.urlencoded({
     }
   })
   const upload=multer({storage})
-    app.use(cors());
+    // app.use(cors());
   app.post("/upload",upload.single("file"),(req,res)=>{
     console.log(req.file)
     console.log(req.file.path)

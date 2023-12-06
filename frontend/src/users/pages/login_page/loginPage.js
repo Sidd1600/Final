@@ -16,6 +16,13 @@ function LoginPage({userNavbar,adminNavbar,setNavbar}) {
   
 
   const Auth = useContext(AuthContext)
+  const handleAuth=async(e)=>{
+    const response=await fetch('/auth/google',{
+        method:"GET",
+    })
+    // const json=await response.json();
+    // console.log(json);
+  }
   const HandleSubmit=async(e)=>{
   
 
@@ -69,10 +76,15 @@ useEffect(()=>{
 })
     return (
     <div className="login-page-container">
+                
         <div className="login-background"></div>
         <div className="login-container">
             <div className="login-text">
                 <p className="login">Login</p>
+                {/* <button id="login" onClick={handleAuth}>SIGN IN WITH GOOGLE</button> */}
+                <form action="http://localhost:3000/auth/google" method="post">
+  <input type="submit" value="Press to log in"/>
+</form>
                 <hr />
                 <p id="sign-in">Sign in to your account</p>
             </div>
@@ -104,6 +116,7 @@ useEffect(()=>{
             </div>
         </form>
         </div>
+
     </div>
 
     );
