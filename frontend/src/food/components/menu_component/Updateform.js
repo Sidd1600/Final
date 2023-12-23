@@ -63,6 +63,7 @@ const handleSubmit=async(e)=>{
         setError(null);
         
         console.log("NEW STRING IS ADDED")
+        alert('ITEM UPDATED SUCCESSFULLY');
         // dispatch({type:'CREATE_WORKOUT',payload:json})
     }
 }

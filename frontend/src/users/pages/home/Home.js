@@ -13,9 +13,6 @@ export default function Home(props) {
   return (
     <div>
       <Hero/>
-      <div className="container">
-        <Carousel/>
-      </div> 
       <Featured/>
       <Footer/>
     </div>
