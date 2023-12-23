@@ -65,6 +65,7 @@ const WorkoutDetails=({workout})=>{
 
         if(response.ok){
             console.log("ITEM WAS DELETED SUCCESSFULLY");
+            alert("ITEM WAS DELETED SUCCESSFULLY");
         }
 
 

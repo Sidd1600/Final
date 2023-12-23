@@ -123,7 +123,8 @@ const handleSubmit=async(e)=>{
         setCategory('');
         setError(null);
         
-        console.log("NEW STRING IS ADDED")
+        console.log("NEW STRING IS ADDED");
+        alert("ITEM ADDED SUCCESSFULLY");
         // dispatch({type:'CREATE_WORKOUT',payload:json})
     }
 }
