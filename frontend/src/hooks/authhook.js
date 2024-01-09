@@ -1,6 +1,6 @@
-import {useCallback, useState, useEffect} from 'react';
+import { useCallback, useState, useEffect } from "react";
 
-let expirationTimer
+let expirationTimer;
 
 export const useAuth = () => {
   // Instead of check for isLoggedin we now check if the token exists
@@ -10,7 +10,7 @@ export const useAuth = () => {
   const [userid, setUserid] = useState(null);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
-  const Login = useCallback((name, token, email,userid, expirationDate) => {
+  const Login = useCallback((name, token, email, userid, expirationDate) => {
     // For token expiration, we maintain a token expiration date in our fronted
     // and check for the timer, the below expiration creates a new Date which is
     // 1 hr after the current time
@@ -28,8 +28,8 @@ export const useAuth = () => {
       JSON.stringify({
         name: name,
         token,
-        email:email,
-        userid:userid,
+        email: email,
+        userid: userid,
         expiration: tokenExpirationDate.toISOString(),
       })
     );
@@ -80,12 +80,12 @@ export const useAuth = () => {
     }
   }, [Login]);
 
-  return{
+  return {
     token,
     Login,
     Logout,
     name,
     email,
-    userid
-  }
+    userid,
+  };
 };
